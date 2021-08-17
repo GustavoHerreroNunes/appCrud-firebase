@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="color-scheme" content="light dark">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--CSS necessário-->
+        <link rel="stylesheet" href="styles/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="styles/css/index.css">
+
+        <title>Crud SQLite - Consultar</title>
+    </head>
+    <body>
+      <div class="container">
+        <div class="p-4 pb-5 mb-4">
+          <div class="table-responsive border border-light rounded col-12 mb-2">
+            <table class="table table-hover text-nowrap">
+              <thead>
+                <tr class="table-info">
+                  <th scope="col">Nome</th>
+                  <th scope="col">Telefone</th>
+                  <th scope="col">Origem</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Observação</th>
+                  <th scope="col" colspan="2" class="text-center">Ação</th>
+                </tr>
+              </thead>
+              <tbody id="TableData">
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!--Menu inferior-->
+        <nav class="navbar fixed-bottom navbar-light bg-light">
+          <div class="container">
+              <a class="navbar-brand text-center m-0" href="./cadastrar.html" aria-current="page">
+                  <img class="mx-5" src="./img/cadastrar.png" alt="Página de Cadastro" width="50" height="50">
+              </a>
+              <a class="navbar-brand text-center m-0" href="./consultar.html">
+                  <img class="mx-5" src="./img/consultar.png" alt="Página de Consulta" width="50" height="50">
+              </a>
+          </div>
+        </nav>
+      </div>
+        
+      <!--Scripts base para o Cordova-->
+      <script src="cordova.js"></script>
+
+      <!--Script base para o Bootstrap-->
+      <script src="./styles/bootstrap/js/bootstrap.js"></script>
+
+      <!--Script base para o JQuery-->
+      <script src="js/jquery.js"></script>
+
+      <!--Script base para este arquivo-->
+      <script src="./js/consultar.js"></script>
+    </body>
+</html>

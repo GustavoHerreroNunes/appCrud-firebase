@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="color-scheme" content="light dark">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--CSS necessário-->
+        <link rel="stylesheet" href="styles/bootstrap/css/bootstrap.css">
+
+        <title>Crud SQLite - Excluir</title>
+    </head>
+    <body>
+      <div class="container">
+        <div class="p-4 pb-5 mb-4">
+          <form name="frmExcluirCliente">
+            <h1 class="text-center">Excluir</h1>
+  
+            <div class="row">
+              <label for="txbNome" class="ps-0 pt-3 fs-6 text-secondary form-label">Nome:</label>
+              <input type="text" name="txbNome" id="txbNome" placeholder="Nome completo do cliente" class="form-control" readonly>
+            </div>
+  
+            <div class="row">
+              <label for="txbTelefone" class="ps-0 pt-3 fs-6 text-secondary form-label">Telefone:</label>
+              <input type="text" name="txbTelefone" id="txbTelefone" placeholder="Telefone celular do cliente" class="form-control" readonly>
+            </div>
+  
+            <div class="row">
+              <label for="slctOrigem" class="ps-0 pt-3 fs-6 text-secondary form-label">Origem:</label>
+            </div>
+  
+            <div class="row">
+              <select id="slctOrigem" class="form-select" disabled>
+                <option>Como o cliente encontrou a loja</option>
+                <option value="Site">Site</option>
+                <option value="Google Ads">Google Ads</option>
+                <option value="Facebook">Facebook</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Whatsapp">Whatsapp</option>
+                <option value="E-mail">E-mail</option>
+              </select>
+            </div>
+  
+            <div class="row">
+              <label for="txbDataContato" class="ps-0 pt-3 fs-6 text-secondary form-label">Data de Contato:</label>
+              <input type="date" name="txbDataContato" id="txbDataContato" class="form-control" readonly>
+            </div>
+  
+            <div class="row">
+              <label for="txbObservacao" class="ps-0 pt-3 fs-6 text-secondary form-label">Observação:</label>
+              <textarea name="txbObservacao" id="txbObservacao" maxlength="200" rows="4" placeholder="Uma observação sobre o cliente de até 200 caracteres" class="form-control" readonly></textarea>
+            </div>
+  
+            <div class="row justify-content-center mt-1">
+              <a href="consultar.html" class="col-4 p-0 m-3">
+                <button type="button" name="btnCancelar" class="btn btn-secondary col-12">
+                  Cancelar
+                </button>
+              </a>
+
+              <button type="reset" name="btnExcluir" id="btnExcluir" class="btn btn-primary col-4 m-3">
+                Excluir
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!--Menu inferior-->
+        <nav class="navbar fixed-bottom navbar-light bg-light">
+          <div class="container">
+              <a class="navbar-brand text-center m-0" href="./cadastrar.html" aria-current="page">
+                  <img class="mx-5" src="./img/cadastrar.png" alt="Página de Cadastro" width="50" height="50">
+              </a>
+              <a class="navbar-brand text-center m-0" href="./consultar.html">
+                  <img class="mx-5" src="./img/consultar.png" alt="Página de Consulta" width="50" height="50">
+              </a>
+          </div>
+        </nav>
+      </div>
+      <!--Scripts base para o Cordova-->
+      <script src="cordova.js"></script>
+
+      <!--Script base para o Bootstrap-->
+      <script src="./styles/bootstrap/js/bootstrap.js"></script>
+
+      <!--Script base para o JQuery-->
+      <script src="js/jquery.js"></script>
+
+      <!--Script base para este arquivo-->
+      <script src="./js/excluir.js"></script>
+    </body>
+</html>

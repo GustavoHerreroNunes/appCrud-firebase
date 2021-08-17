@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="color-scheme" content="light dark">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--CSS necessário-->
+        <link rel="stylesheet" href="styles/bootstrap/css/bootstrap.css">
+
+        <title>Crud SQLite</title>
+    </head>
+    <body>
+        <div class="container-flex">
+            <div class="position-absolute top-50 start-50 translate-middle">
+                <!--Cards para ações no Banco de Dados-->
+                <div class="b-0">
+                    <a href="./cadastrar.html" class="text-decoration-none text-reset">
+                        <div class="card bg-light text-dark rounded">
+                            <div class="card-body text-center">
+                                <img src="./img/cadastrar.png" width="50" height="50" alt="Símbolo de Cadastrar">
+                                <h3 class="card-title">Cadastrar</h3>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    </br>
+
+                    <a href="./consultar.html" class="text-decoration-none text-reset">
+                        <div class="card bg-light text-dark rounded">
+                            <div class="card-body text-center">
+                                <img src="./img/consultar.png" width="50" height="50" alt="Símbolo de Consultar">
+                                <h3 class="card-title">Consultar</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+      <!--Scripts base para o Cordova-->
+      <script src="cordova.js"></script>
+
+      <!--Script base para o Bootstrap-->
+      <script src="./styles/bootstrap/js/bootstrap.js"></script>
+
+      <!--Scripts base para o Firebase-->
+      <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js" ></script>
+      <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js" ></script>
+      <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js" ></script>
+      <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js" ></script>
+      <!--Conexão com o projeto Firebase-->
+      <script src="./js/firebase.js" ></script>
+
+      <!--Script base para o JQuery-->
+      <script src="js/jquery.js"></script>
+
+      <!--Script base para este arquivo-->
+      <script src="./js/index.js"></script>
+    </body>
+</html>
