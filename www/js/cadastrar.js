@@ -22,7 +22,7 @@ var app = {
 
         var db = firebase.firestore();
 
-        db.collection("agendamentos").add({
+        db.collection("cadastros").add({
             nome: registNome,
             telefone: registTelefone,
             origem: registOrigem,
@@ -30,10 +30,13 @@ var app = {
             observacao: registObservacao
         })
         .then( (docRef) => {
-            alert("Documento written with ID: " + docRef.id);
+            alert("Cliente cadastrado com sucesso");
+            console.info("Document ID: "  + docRef.id);
+            window.location.href = "cadastrar.html";
         })
         .catch( (error) => {
-            alert("Error adding document: " + error);
+            alert("Erro ao cadastrar cliente");
+            console.info("Erro ao cadastrar documento: " + error);
         });
     }
 };
