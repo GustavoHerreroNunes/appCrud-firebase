@@ -40,7 +40,47 @@ var app = {
         });
     },
 
-    
+    //Edita os dados do documento selecionado
+    editar: function(){
+        let registNome = document.getElementById("txbNome").value;
+        let registTelefone = document.getElementById("txbTelefone").value;
+        let registOrigem = document.getElementById("slctOrigem").value;
+        let registDataContato = document.getElementById("txbDataContato").value;
+        let registObservacao = document.getElementById("txbObservacao").value;
+
+        var db = firebase.firestore();
+        var docSelected = db.collection("cadastros").where("telefone", "==", registTelefone);
+
+        docSelected.get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+
+                return db.collection("cadastros").doc(doc.id).update({
+                    nome: registNome,
+                    telefone: registTelefone,
+                    origem: registOrigem,
+                    data_contato: registDataContato,
+                    observacao: registObservacao,
+                })
+                .then(() => {
+                    alert("Registro editado com sucesso!");
+                    window.location.href = "consultar.html";
+                })
+                .catch((error) => {
+                    alert("Erro ao editar registro");
+                    console.info("Erro ao editar registro: " + error);
+                    window.location.href = "consultar.html";
+                });
+
+            });
+        })
+        .catch((error) => {
+            alert("Erro ao editar registro");
+            console.info("Erro ao buscar registro para a edição: " + error);
+        });
+
+    }
+
     
 
 };
