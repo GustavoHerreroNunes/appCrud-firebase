@@ -9,80 +9,76 @@ var app = {
     //Quando todas as estruturas cordova tiverem inicializado
     onDeviceReady: function(){
         console.info("Device Ready");
-        document.getElementById("btnExcluir").addEventListener('click', app.excluir);
-        this.receiveEvent('deviceready');
-    },
-
-    //Atualiza o DOM ao receber um evento
-    receiveEvent: function(id){
-        console.info("Recebendo Evento");
-        //Abrindo banco de dados, ou criando se não existir
-        db = window.sqlitePlugin.openDatabase({
-            name: 'appCrud.db',
-            location: 'default',
-            androidDatabaseProvider: 'system'
-        });
-
-        //Criando tabela 'clientes' no banco de dados se ela não existir
-        db.transaction( function(tx){
-            tx.executeSql('CREATE TABLE IF NOT EXISTS clients (nome, telefone, origem, data_contato, observacao)');
-        },
-        function(error){
-            console.info('Transaction ERROR: ' + error.message);
-        },
-        function(){
-            console.info("Tabela Criada com sucesso");
-            app.buscar();
-        });
+        document.getElementById("btnExcluir").addEventListener('click', app.confirmarExclusao);
+        app.buscar();
     },
 
     //Busca pelo registro selecionado na tabela 'clientes'
     buscar: function(){
-        var url_passada = window.location.href;
-        var url = new URL(url_passada);
-        var telefone_passado = url.searchParams.get("telefone");
+        var string_url = window.location.href;
+        var url = new URL(string_url);
+        var doc_telefone = url.searchParams.get("telefone");
 
-        db.executeSql(
-            'SELECT nome AS registNome, telefone AS registTelefone, origem AS registOrigem, data_contato AS registDataContato, observacao AS registObservacao FROM clientes WHERE telefone = ?',
-            [telefone_passado],
-            function(registro){
+        var db = firebase.firestore();
+        var registry = db.collection('cadastros').where('telefone', '==', doc_telefone);
 
-                let i = 0;
-                for(i = 0; i< registro.rows.length; i++){
-                    document.getElementById("txbNome").value = registro.rows.item(i).registNome;
-                    document.getElementById("txbTelefone").value = registro.rows.item(i).registTelefone;
+        registry.get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => { 
+                document.getElementById("txbNome").value = doc.data().nome;
+                document.getElementById("txbTelefone").value = doc.data().telefone;
+                document.getElementById("slctOrigem").value = doc.data().origem;
+                document.getElementById("txbDataContato").value = doc.data().data_contato;
+                document.getElementById("txbObservacao").value = doc.data().observacao;
+            });
+        })
+        .catch((error) => {
+            alert("Erro ao apresentar dados do registro");
+            console.info("Erro ao buscar por registro: " + error);
+            window.location.href = "consultar.html";
+        });
+    },
 
-                    document.getElementById("slctOrigem").value = registro.rows.item(i).registOrigem;
+    //Pede confirmação para a exclusão de um registro selecionado
+    confirmarExclusao: function(){
+        var doc_nome = document.getElementById("txbNome").value;
 
-                    document.getElementById("txbDataContato").value = registro.rows.item(i).registDataContato;
-                    
-                    document.getElementById("txbObservacao").value = registro.rows.item(i).registObservacao;
-                }
-            },
-            function(error){
-                console.info("Erro ao buscar registro: " + error.message);
-            }
+        navigator.notification.confirm(
+            'Deseja mesmo excluir o registro de \"' + doc_nome + '\"?',
+            app.excluir,
+            'Excluir Registro',
+            ['Sim', 'Cancelar']
         );
     },
 
-    //Salva as edições feitas em um registro da tabela 'clientes'
-    excluir: function(){
-        var url_passada = window.location.href;
-        var url = new URL(url_passada);
-        var telefone_passado = url.searchParams.get("telefone");
+    //Exclui um registro selecionado da tabela 'clientes'
+    excluir: function(awnser){
+        if(awnser == 1){
+            var doc_telefone = document.getElementById("txbTelefone").value;
 
-        db.transaction( function(tx){
-            tx.executeSql(
-                'DELETE FROM clientes WHERE telefone = ?',
-                [telefone_passado]
-            );
-        },
-        function(error){
-            console.info("Erro ao excluir registro: " + error.message);
-        },
-        function(){
-            console.info("Registro excluído com sucesso!");
-        });
+            var db = firebase.firestore();
+            var registry = db.collection('cadastros').where('telefone', '==', doc_telefone);
+
+            registry.get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    db.collection('cadastros').doc(doc.id).delete()
+                    .then(() => {
+                        alert("Registro excluído com sucesso!");
+                        window.location.href = "consultar.html";
+                    })
+                    .catch((error) => {
+                        alert("Erro ao excluir registro");
+                        console.info("Erro ao excluir registro: " +  error);
+                    })
+                })
+            })
+            .catch((error) => {
+                alert("Erro ao excluir o registro");
+                console.info("Erro ao buscar registro para exclusão: " + error);
+                window.location.href = "consultar.html";
+            })
+        }
     }
 };
 
